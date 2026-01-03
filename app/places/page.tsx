@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getFirstSearchParam } from "@/lib/utils";
 import { SupabaseClient } from "@supabase/supabase-js";
 import SearchMyLocationForm from "./searchLocationForm";
+import PlaceMap from "@/components/Map";
 
 async function getPlaces(
   supabase: SupabaseClient,
@@ -14,7 +15,7 @@ async function getPlaces(
       long: parseFloat(lon),
     });
   }
-  return await supabase.from("places").select();
+  return await supabase.rpc("all_places");
 }
 
 export default async function Places({
@@ -27,6 +28,10 @@ export default async function Places({
   const lat = getFirstSearchParam(search, "lat");
   const lon = getFirstSearchParam(search, "lon");
   const { data: places } = await getPlaces(supabase, lat, lon);
+  const pins = places?.map((place) => ({
+    key: place.id,
+    location: { lat: place.lat, lng: place.long },
+  }));
 
   return (
     <div className="grid gap-4">
@@ -45,6 +50,7 @@ export default async function Places({
           </a>
         </div>
       ))}
+      <PlaceMap centreLat={lat ? parseFloat(lat) : undefined} centreLon={lon ? parseFloat(lon) : undefined} pins={pins} />
     </div>
   );
 }
