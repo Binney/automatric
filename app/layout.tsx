@@ -28,6 +28,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <div className="mt-4 text-xs text-center">Automatric • From Binney, {new Date().getFullYear()}</div>
       </body>
     </html>
   );
