@@ -30,7 +30,7 @@ export default async function Places({
 
   return (
     <div className="grid gap-4">
-      <SearchMyLocationForm firstLat={lat} firstLon={lon} />
+      <SearchMyLocationForm />
       {places?.map((place) => (
         <div key={place.id} className="border rounded-lg p-4">
           <h2 className="text-lg font-semibold">{place.name}</h2>
