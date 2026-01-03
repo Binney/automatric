@@ -16,9 +16,11 @@ export default function SearchMyLocationForm({firstLat, firstLon}: {firstLat?: s
     const handleUseLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
-                setLatitude(position.coords.latitude.toString());
-                setLongitude(position.coords.longitude.toString());
-                submitForm();
+                const lat = position.coords.latitude.toString();
+                const lon = position.coords.longitude.toString();
+                setLatitude(lat);
+                setLongitude(lon);
+                window.location.href = `/places?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`;
             });
         }
     };
