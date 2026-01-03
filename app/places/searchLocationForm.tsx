@@ -1,34 +1,30 @@
 'use client';
 
-import { useRef } from 'react';
+import { useState } from 'react';
 
 export default function SearchMyLocationForm({firstLat, firstLon}: {firstLat?: string | null; firstLon? : string | null}) {
-    const latInputRef = useRef<HTMLInputElement>(null);
-    const lonInputRef = useRef<HTMLInputElement>(null);
-    const formRef = useRef<HTMLFormElement>(null);
+    const [ latitude, setLatitude ] = useState(firstLat || '');
+    const [ longitude, setLongitude ] = useState(firstLon || '');
+
+    function submitForm(e: React.FormEvent<HTMLFormElement> | undefined = undefined) {
+        if (e) {
+            e.preventDefault();
+        }
+        window.location.href = `/places?lat=${encodeURIComponent(latitude)}&lon=${encodeURIComponent(longitude)}`;
+    }
 
     const handleUseLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
-                const { latitude, longitude } = position.coords;
-                if (latInputRef.current && lonInputRef.current) {
-                    latInputRef.current.value = latitude.toString();
-                    lonInputRef.current.value = longitude.toString();
-                    formRef.current?.requestSubmit();
-                }
+                setLatitude(position.coords.latitude.toString());
+                setLongitude(position.coords.longitude.toString());
+                submitForm();
             });
         }
     };
 
     return <form
-        ref={formRef}
-        // onSubmit={(e) => {
-        //   e.preventDefault();
-        //   const formData = new FormData(e.currentTarget);
-        //   const lat = formData.get("lat");
-        //   const lon = formData.get("lon");
-        //   window.location.href = `?lat=${lat}&lon=${lon}`;
-        // }}
+        onSubmit={submitForm}
         className="flex gap-2"
       >
         <button
@@ -42,6 +38,7 @@ export default function SearchMyLocationForm({firstLat, firstLon}: {firstLat?: s
           step="any"
           defaultValue={firstLat || ""}
           className="border rounded px-3 py-2"
+          onChange={(e) => setLatitude(e.target.value)}
           required
         />
         <input
@@ -51,6 +48,7 @@ export default function SearchMyLocationForm({firstLat, firstLon}: {firstLat?: s
           step="any"
           defaultValue={firstLon || ""}
           className="border rounded px-3 py-2"
+          onChange={(e) => setLongitude(e.target.value)}
           required
         />
         <button
