@@ -13,7 +13,6 @@ async function getPlaces(
       long: parseFloat(lon),
     });
   }
-  console.log("Fetching all places");
   return await supabase.from("places").select();
 }
 
