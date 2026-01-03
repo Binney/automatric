@@ -8,13 +8,10 @@ async function getPlaces(
   lon?: string
 ): Promise<{ data: any[] | null; error: any }> {
   if (lat && lon) {
-    console.log("Fetching nearby places for:", lat, lon);
-    const res = await supabase.rpc("nearby_places", {
+    return await supabase.rpc("nearby_places", {
       lat: parseFloat(lat),
       long: parseFloat(lon),
     });
-    console.log(res)
-    return res;
   }
   console.log("Fetching all places");
   return await supabase.from("places").select();
@@ -23,7 +20,7 @@ async function getPlaces(
 export default async function Places({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const supabase = await createClient();
   const search = await searchParams;
