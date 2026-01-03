@@ -12,7 +12,7 @@ In no particular order
 
 - Pagination
 - Pan map to the right place
-- Tags, page per tag
 - Nice edit
 - Page per entry (with nice URL)
 - Auto create mostly empty row based on gmap list?
+- photos!!
