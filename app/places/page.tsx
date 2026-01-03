@@ -1,8 +1,35 @@
 import { createClient } from "@/lib/supabase/server";
+import { getFirstSearchParam } from "@/lib/utils";
+import { SupabaseClient } from "@supabase/supabase-js";
 
-export default async function Places() {
+async function getPlaces(
+  supabase: SupabaseClient,
+  lat?: string,
+  lon?: string
+): Promise<{ data: any[] | null; error: any }> {
+  if (lat && lon) {
+    console.log("Fetching nearby places for:", lat, lon);
+    const res = await supabase.rpc("nearby_places", {
+      lat: parseFloat(lat),
+      long: parseFloat(lon),
+    });
+    console.log(res)
+    return res;
+  }
+  console.log("Fetching all places");
+  return await supabase.from("places").select();
+}
+
+export default async function Places({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const supabase = await createClient();
-  const { data: places } = await supabase.from("places").select();
+  const search = await searchParams;
+  const lat = getFirstSearchParam(search, "lat");
+  const lon = getFirstSearchParam(search, "lon");
+  const { data: places } = await getPlaces(supabase, lat, lon);
 
   return (
     <div className="grid gap-4">
