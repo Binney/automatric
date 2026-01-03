@@ -30,6 +30,7 @@ export default function SearchMyLocationForm({firstLat, firstLon}: {firstLat?: s
         <button
           type="button"
           onClick={handleUseLocation}>Use my location</button>
+          {latitude}, {longitude}
 
         <input
           type="number"
