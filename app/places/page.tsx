@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { getFirstSearchParam } from "@/lib/utils";
 import { SupabaseClient } from "@supabase/supabase-js";
+import SearchMyLocationForm from "./searchLocationForm";
 
 async function getPlaces(
   supabase: SupabaseClient,
@@ -29,6 +30,7 @@ export default async function Places({
 
   return (
     <div className="grid gap-4">
+      <SearchMyLocationForm firstLat={lat} firstLon={lon} />
       {places?.map((place) => (
         <div key={place.id} className="border rounded-lg p-4">
           <h2 className="text-lg font-semibold">{place.name}</h2>
