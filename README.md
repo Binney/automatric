@@ -14,3 +14,5 @@ In no particular order
 - Pan map to the right place
 - Nice edit
 - photos!!
+- homepage featured lists cards row
+- cards row on categories

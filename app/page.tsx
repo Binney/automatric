@@ -1,15 +1,15 @@
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="flex min-h-[90vh] flex-col items-center justify-center py-2">
       <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
         <h1 className="text-6xl font-bold">Welcome to automatric!</h1>
         <p className="mt-3 text-2xl">
           The best{" "}
-          <a href="/places" className="text-blue-600 hover:underline">
+          <Link href="/places" className="text-blue-600 hover:underline">
             places
-          </a>{" "}
+          </Link>{" "}
           to discover magical machines of every kind.
         </p>
 
@@ -27,13 +27,15 @@ export default function Home() {
           </p>
           <p className="mt-2">
             The nature of the automation can be anything from moving puppets, to
-            autonomous shows, to games and interactives.
+            autonomous performances, to games and interactives.
           </p>
+          <p className="mt-2">Just take a look. You&apos;ll get the idea pretty quickly.</p>
           <p className="mt-2">
             I take suggestions! @ me on Mastodon:{" "}
             <a href="https://mastodon.me.uk/@binney">@binney</a>.
           </p>
         </details>
+
       </main>
     </div>
   );
