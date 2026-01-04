@@ -5,11 +5,10 @@ How to reimport from google maps
 3. Load map list
 4. Search network for `entitylist`
 5. Paste response into ts file
-6. Import here as arr
+6. Import here as pl
 7. Copy and paste resulting fields into SQL query
 */
 
-import { arr } from "./app/export";
 import { slugify } from "./lib/utils";
 
 // Update these to match current db row (or do it properly! idm)
@@ -27,7 +26,7 @@ function ExportFormat({ row }: { row: any }) {
 }
 
 export default function ExportedPlaces() {
-  const pl = arr;
+  const pl = [/* paste the export here */];
   return (
     <div>
       {/* It's reversed so oldest first */}
