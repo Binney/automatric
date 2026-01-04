@@ -6,7 +6,7 @@ export default function Home() {
       <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
         <h1 className="text-6xl font-bold">Welcome to automatric!</h1>
         <p className="mt-3 text-2xl">
-          The best{" "}
+          A list of{" "}
           <Link href="/places" className="text-blue-600 hover:underline">
             places
           </Link>{" "}
