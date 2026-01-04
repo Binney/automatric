@@ -19,7 +19,7 @@ export default function PlaceMap({
   return (
     <APIProvider
       apiKey={process.env.NEXT_PUBLIC_GMAPS_API_KEY || ""}
-      onLoad={() => console.log("done!")}
+      onLoad={() => console.log("mapped!")}
     >
       <Map
         defaultZoom={13}

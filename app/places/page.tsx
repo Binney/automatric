@@ -11,7 +11,7 @@ async function getPlaces(
   if (lat && lon) {
     return await supabase.rpc("nearby_places", {
       lat: parseFloat(lat),
-      long: parseFloat(lon),
+      lon: parseFloat(lon),
     });
   }
   return await supabase.rpc("all_places");
