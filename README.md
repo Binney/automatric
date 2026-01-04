@@ -13,5 +13,4 @@ In no particular order
 - Pagination
 - Pan map to the right place
 - Nice edit
-- Auto create mostly empty row based on gmap list?
 - photos!!

@@ -1,0 +1,41 @@
+/*
+How to reimport from google maps
+1. Make list
+2. Open devtools network console
+3. Load map list
+4. Search network for `entitylist`
+5. Paste response into ts file
+6. Import here as arr
+7. Copy and paste resulting fields into SQL query
+*/
+
+import { arr } from "./app/export";
+import { slugify } from "./lib/utils";
+
+// Update these to match current db row (or do it properly! idm)
+const users = []
+
+function ExportFormat({ row }: { row: any }) {
+  return (
+    <div>
+      (&apos;{row[2].replace("'", "''")}&apos;,
+      {row[3] ? `'${row[3].replace("'", "''")}'` : "NULL"},extensions.st_point(
+      {row[1][5][3]}, {row[1][5][2]}),&apos;{slugify(row[2])}&apos;,
+      {users.indexOf(row[12][0]) + 1}),
+    </div>
+  );
+}
+
+export default function ExportedPlaces() {
+  const pl = arr;
+  return (
+    <div>
+      {/* It's reversed so oldest first */}
+      {pl.toReversed().map((p, i) => (
+        <div key={i}>
+          <ExportFormat row={p} />
+        </div>
+      ))}
+    </div>
+  );
+}

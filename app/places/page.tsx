@@ -27,6 +27,5 @@ export default async function PlacesPage({
   const lat = getFirstSearchParam(search, "lat");
   const lon = getFirstSearchParam(search, "lon");
   const { data: places } = await getPlaces(supabase, lat, lon);
-
   return <Places places={places} lat={lat} lon={lon} />;
 }
