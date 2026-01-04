@@ -12,9 +12,9 @@ How to reimport from google maps
 import { slugify } from "./lib/utils";
 
 // Update these to match current db row (or do it properly! idm)
-const users = []
+const users = ["Binney"]
 
-function ExportFormat({ row }: { row: any }) {
+function ExportFormat({ row }) {
   return (
     <div>
       (&apos;{row[2].replace("'", "''")}&apos;,
